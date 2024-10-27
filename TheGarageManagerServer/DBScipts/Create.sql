@@ -11,18 +11,18 @@ Use TheGarageManagerDB
 Go
 
 CREATE TABLE GARAGE (
-    GarageID NVARCHAR PRIMARY KEY,
+    GarageID INT PRIMARY KEY IDENTITY,
     MosahNumber INT,
-    GarageName NVARCHAR,
+    GarageName NVARCHAR(150),
     TypeCode INT,
-    GarageType NVARCHAR,
-    GarageAddress NVARCHAR,
-    City NVARCHAR,
+    GarageType NVARCHAR(100),
+    GarageAddress NVARCHAR(100),
+    City NVARCHAR(70),
     Phone INT,
     ZipCode INT,
     SpecializationCode INT,
-    Specialization NVARCHAR,
-    ManagerSpecialization NVARCHAR,
+    Specialization NVARCHAR(150),
+    ManagerSpecialization NVARCHAR(100),
     License INT,
     TestTime DATE,
     WorkingHours VARCHAR
@@ -30,16 +30,16 @@ CREATE TABLE GARAGE (
 
 CREATE TABLE VEHICLE (
     LicensePlate INT PRIMARY KEY,
-    Model NVARCHAR,
+    Model NVARCHAR(80),
     YearVehicle INT,
-    FuelType NVARCHAR,
-    Color NVARCHAR,
-    Manufacturer NVARCHAR,
+    FuelType NVARCHAR(70),
+    Color NVARCHAR(30),
+    Manufacturer NVARCHAR(100),
     CurrentMileage INT
 );
 
 CREATE TABLE CARREPAIR (
-    RepairID INT PRIMARY KEY,
+    RepairID INT PRIMARY KEY IDENTITY,
     LicensePlate INT,
     GarageID INT,
     RepairDate DATETIME,
@@ -50,16 +50,16 @@ CREATE TABLE CARREPAIR (
 );
 
 CREATE TABLE VEHICLEPART (
-    PartID INT PRIMARY KEY,
-    PartName NVARCHAR,
+    PartID INT PRIMARY KEY IDENTITY,
+    PartName NVARCHAR(30),
     PartNumber INT,
     Cost INT,
-    Supplier NVARCHAR,
-    ImageURL NVARCHAR
+    Supplier NVARCHAR(50),
+    ImageURL NVARCHAR(350)
 );
 
 CREATE TABLE GARAGE_PARTS (
-    GaragePartID INT PRIMARY KEY,
+    GaragePartID INT PRIMARY KEY IDENTITY,
     GarageID INT,
     PartID INT,
     QuantityAvailable INT,
@@ -68,37 +68,41 @@ CREATE TABLE GARAGE_PARTS (
 );
 
 CREATE TABLE EMPLOYEE (
-    EmployeeID INT PRIMARY KEY,
-    NameEmployee NVARCHAR,
-    Position NVARCHAR,
+    EmployeeID INT PRIMARY KEY IDENTITY,
+    NameEmployee NVARCHAR(50),
+    Position NVARCHAR(70),
     GarageID INT,
     Phone INT,
-    Email NVARCHAR,
+    Email NVARCHAR(50),
     HireDate DATE,
     Specialization NVARCHAR,
     FOREIGN KEY (GarageID) REFERENCES GARAGE(GarageID)
 );
 
 CREATE TABLE REPAIRIMAGE (
-    ImageID INT PRIMARY KEY,
+    ImageID INT PRIMARY KEY IDENTITY,
     RepairID INT,
-    ImageURL NVARCHAR,
+    ImageURL NVARCHAR(350),
     UploadDate DATETIME,
     FOREIGN KEY (RepairID) REFERENCES CARREPAIR(RepairID)
 );
 
 CREATE TABLE Users (
     UserID INT PRIMARY KEY IDENTITY,
-    ManagerName NVARCHAR,
+    ManagerName NVARCHAR(50),
     License INT,
     UserStatusID INT,
     FOREIGN KEY (UserStatusID) REFERENCES UserStatus(StatusID)
 );
 
 CREATE TABLE UserStatus (
-    StatusID INT PRIMARY KEY,
-    StatusName NVARCHAR
+    StatusID INT PRIMARY KEY  IDENTITY,
+    StatusName NVARCHAR(80)
 );
+
+Insert Into UserStatus Values('User')
+Insert Into UserStatus Values('Manager')
+
 
 Insert Into Users Values('admin', 23345567, 1)
 Go
@@ -118,4 +122,4 @@ DROP DATABASE YourProjectNameDB
 
 
 
---scaffold-DbContext "Server = (localdb)\MSSQLLocalDB;Initial Catalog=TheGarageManagerDB;User ID=TheGarageManagerAdminLogin;Password=thePassword;" Microsoft.EntityFrameworkCore.SqlServer -OutPutDir Models -Context TheGarageManagerDbContext -DataAnnotations –force
+--scaffold-DbContext "Server = (localdb)\MSSQLLocalDB;Initial Catalog=TheGarageManagerDB;User ID=TheGarageManagerAdminUser;Password=admin123;" Microsoft.EntityFrameworkCore.SqlServer -OutPutDir Models -Context TheGarageManagerDbContext -DataAnnotations –force
