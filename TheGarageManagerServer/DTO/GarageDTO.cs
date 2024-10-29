@@ -15,8 +15,6 @@
         public string Specialization { get; set; }
         public string ManagerSpecialization { get; set; }
         public string License { get; set; } 
-        public DateTime TestTime { get; set; } 
-        public string WorkingHours { get; set; }
 
     }
 }

@@ -2,9 +2,13 @@
 {
     public class GaragePartsDTO
     {
-        public int GaragePartID { get; set; }
-        public int GarageID { get; set; }
         public int PartID { get; set; }
-        public int QuantityAvailable { get; set; }  
+        public int GarageID { get; set; }
+        public string PartName { get; set; }
+        public int PartNumber { get; set; }
+        public int Cost { get; set; }
+        public string ImageURL { get; set; }
+
+
     }
 }

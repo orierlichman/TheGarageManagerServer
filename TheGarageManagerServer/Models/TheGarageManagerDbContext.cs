@@ -15,17 +15,66 @@ public partial class TheGarageManagerDbContext : DbContext
     {
     }
 
-    public virtual DbSet<AppUser> AppUsers { get; set; }
+    public virtual DbSet<Appointment> Appointments { get; set; }
+
+    public virtual DbSet<CarRepair> CarRepairs { get; set; }
+
+    public virtual DbSet<Garage> Garages { get; set; }
+
+    public virtual DbSet<GaragePart> GarageParts { get; set; }
+
+    public virtual DbSet<UserStatus> UserStatuses { get; set; }
+
+    public virtual DbSet<Vehicle> Vehicles { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server = (localdb)\\MSSQLLocalDB;Initial Catalog=TheGarageManagerDB;User ID=TheGarageManagerAdminLogin;Password=thePassword;");
+        => optionsBuilder.UseSqlServer("Server = (localdb)\\MSSQLLocalDB;Initial Catalog=TheGarageManagerDB;User ID=TheGarageManagerAdminLogin;Password=admin123;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<AppUser>(entity =>
+        modelBuilder.Entity<Appointment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__AppUsers__3214EC07B75679DE");
+            entity.HasKey(e => e.AppointmentId).HasName("PK__Appointm__8ECDFCA25D27F47D");
+
+            entity.HasOne(d => d.Garage).WithMany(p => p.Appointments).HasConstraintName("FK__Appointme__Garag__34C8D9D1");
+
+            entity.HasOne(d => d.LicensePlateNavigation).WithMany(p => p.Appointments).HasConstraintName("FK__Appointme__Licen__35BCFE0A");
+        });
+
+        modelBuilder.Entity<CarRepair>(entity =>
+        {
+            entity.HasKey(e => e.RepairId).HasName("PK__CarRepai__07D0BDCD667DAE3D");
+
+            entity.HasOne(d => d.Garage).WithMany(p => p.CarRepairs).HasConstraintName("FK__CarRepair__Garag__2A4B4B5E");
+
+            entity.HasOne(d => d.LicensePlateNavigation).WithMany(p => p.CarRepairs).HasConstraintName("FK__CarRepair__Licen__29572725");
+        });
+
+        modelBuilder.Entity<Garage>(entity =>
+        {
+            entity.HasKey(e => e.GarageId).HasName("PK__Garage__5D8BEEB1C2CD85F9");
+
+            entity.Property(e => e.GarageId).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<GaragePart>(entity =>
+        {
+            entity.HasKey(e => e.PartId).HasName("PK__GaragePa__7C3F0D30A419CD20");
+
+            entity.HasOne(d => d.Garage).WithMany(p => p.GarageParts).HasConstraintName("FK__GaragePar__Garag__2D27B809");
+        });
+
+        modelBuilder.Entity<UserStatus>(entity =>
+        {
+            entity.HasKey(e => e.StatusId).HasName("PK__UserStat__C8EE20433BE08C41");
+        });
+
+        modelBuilder.Entity<Vehicle>(entity =>
+        {
+            entity.HasKey(e => e.LicensePlate).HasName("PK__Vehicle__026BC15DC160C254");
+
+            entity.Property(e => e.LicensePlate).ValueGeneratedNever();
         });
 
         OnModelCreatingPartial(modelBuilder);
