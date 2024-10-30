@@ -56,19 +56,24 @@ CREATE TABLE GarageParts (
     ImageURL NVARCHAR(350),
     FOREIGN KEY (GarageID) REFERENCES Garage(GarageID)
 );
-
-CREATE TABLE Users (
-    UserID INT PRIMARY KEY IDENTITY,
-    ManagerName NVARCHAR(50),
-    License INT,
-    UserStatusID INT,
-    FOREIGN KEY (UserStatusID) REFERENCES UserStatus(StatusID)
-);
-
 CREATE TABLE UserStatus (
     StatusID INT PRIMARY KEY IDENTITY,
     StatusName NVARCHAR(80)
 );
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY IDENTITY,
+    Email  NVARCHAR(70),
+    UserPassword NVARCHAR(50),
+    UserFirstName NVARCHAR(50) ,
+	UserLastName NVARCHAR(50),
+    UserGarageID INT NOT NULL,
+    UserStatusID INT,
+    FOREIGN KEY (UserGarageID) REFERENCES Garage(GarageID),
+    FOREIGN KEY (UserStatusID) REFERENCES UserStatus(StatusID)
+);
+
+
+
 
 CREATE TABLE Appointment (
     AppointmentID INT PRIMARY KEY IDENTITY,
@@ -84,9 +89,13 @@ CREATE TABLE Appointment (
 Insert Into UserStatus Values('User')
 Insert Into UserStatus Values('Manager')
 
-
-Insert Into Users Values('admin', 23345567, 1)
+Insert Into Garage Values(103,2,'benigarage',3456,'tipol', 'gigi', 'hod hasharon', '056277899', 'ori06', 8, 'mosahnik', 'king', 538903749)
 Go
+
+Insert Into Users Values('email2@2gmail.com','0610','ori','erlichman',103, 1)
+Go
+
+select * from Garage
 -- Create a login for the admin user
 CREATE LOGIN [TheGarageManagerAdminLogin] WITH PASSWORD = 'admin123';
 Go
@@ -98,6 +107,8 @@ Go
 -- Add the user to the db_owner role to grant admin privileges
 ALTER ROLE db_owner ADD MEMBER [TheGarageManagerAdminUser];
 Go
+
+select * from Users
 
 --DROP DATABASE YourProjectNameDB
 

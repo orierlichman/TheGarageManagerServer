@@ -15,4 +15,7 @@ public partial class UserStatus
 
     [StringLength(80)]
     public string? StatusName { get; set; }
+
+    [InverseProperty("UserStatus")]
+    public virtual ICollection<User> Users { get; set; } = new List<User>();
 }

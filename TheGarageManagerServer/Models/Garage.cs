@@ -53,4 +53,7 @@ public partial class Garage
 
     [InverseProperty("Garage")]
     public virtual ICollection<GaragePart> GarageParts { get; set; } = new List<GaragePart>();
+
+    [InverseProperty("UserGarage")]
+    public virtual ICollection<User> Users { get; set; } = new List<User>();
 }

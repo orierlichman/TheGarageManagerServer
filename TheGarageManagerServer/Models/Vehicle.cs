@@ -13,21 +13,17 @@ public partial class Vehicle
     public int LicensePlate { get; set; }
 
     [StringLength(80)]
-    [Unicode(false)]
     public string? Model { get; set; }
 
     public int? YearVehicle { get; set; }
 
     [StringLength(70)]
-    [Unicode(false)]
     public string? FuelType { get; set; }
 
     [StringLength(30)]
-    [Unicode(false)]
     public string? Color { get; set; }
 
     [StringLength(100)]
-    [Unicode(false)]
     public string? Manufacturer { get; set; }
 
     public int? CurrentMileage { get; set; }
