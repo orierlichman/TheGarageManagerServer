@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TheGarageManagerServer.DTO;
 using TheGarageManagerServer.Models;
 
 [Route("api")]
@@ -21,6 +22,37 @@ public class TheGarageManagerAPIController : ControllerBase
     public ActionResult<string> TestServer()
     {
         return Ok("Server Responded Successfully");
+    }
+
+
+    [HttpPost("login")]
+    public IActionResult Login([FromBody] LoginInfo loginDto)
+    {
+        try
+        {
+            HttpContext.Session.Clear(); //Logout any previous login attempt
+
+            //Get model user class from DB with matching email. 
+            User modelsUser = context.GetUser(loginDto.Email);
+
+            //Check if user exist for this email and if password match, if not return Access Denied (Error 403) 
+            if (modelsUser == null || modelsUser.UserPassword != loginDto.Password)
+            {
+                return Unauthorized();
+            }
+
+            //Login suceed! now mark login in session memory!
+            HttpContext.Session.SetString("loggedInUser", modelsUser.Email);
+
+            UserDTO dtoUser = new UserDTO(modelsUser);
+            //dtoUser.ProfileImagePath = GetProfileImageVirtualPath(dtoUser.Id);
+            return Ok(dtoUser);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
     }
 
 }
