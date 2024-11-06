@@ -55,4 +55,53 @@ public class TheGarageManagerAPIController : ControllerBase
 
     }
 
+    [HttpPost("register")]
+    public IActionResult Register([FromBody] UserDTO userDto)
+    {
+        try
+        {
+            HttpContext.Session.Clear(); //Logout any previous login attempt
+
+            //Create model user class
+            User modelsUser = userDto.GetModels();
+
+            context.Users.Add(modelsUser);
+            context.SaveChanges();
+
+            //User was added!
+            UserDTO dtoUser = new UserDTO(modelsUser);
+            //dtoUser.ProfileImagePath = GetProfileImageVirtualPath(dtoUser.Id);
+            return Ok(dtoUser);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
+    }
+
+    [HttpGet("GetUserStatuses")]
+    public IActionResult GetUserStatuses()
+    {
+        try
+        {
+            List<UserStatus> statuses = context.UserStatuses.ToList();
+
+            List<UserStatusDTO> result = new List<UserStatusDTO>();
+            foreach (UserStatus status in statuses)
+            {
+                result.Add(new UserStatusDTO(status));
+            }
+            
+            
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
+    }
+
+
 }
