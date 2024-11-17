@@ -13,7 +13,8 @@ public partial class CarRepair
     [Column("RepairID")]
     public int RepairId { get; set; }
 
-    public int? LicensePlate { get; set; }
+    [StringLength(80)]
+    public string? LicensePlate { get; set; }
 
     [Column("GarageID")]
     public int? GarageId { get; set; }

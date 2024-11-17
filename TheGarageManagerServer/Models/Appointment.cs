@@ -19,7 +19,8 @@ public partial class Appointment
     [Column("GarageID")]
     public int? GarageId { get; set; }
 
-    public int? LicensePlate { get; set; }
+    [StringLength(80)]
+    public string? LicensePlate { get; set; }
 
     [StringLength(50)]
     public string? AppointmentStatus { get; set; }

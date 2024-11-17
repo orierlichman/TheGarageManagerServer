@@ -27,7 +27,7 @@ CREATE TABLE Garage (
 );
 
 CREATE TABLE Vehicle (
-    LicensePlate INT PRIMARY KEY,
+    LicensePlate NVARCHAR(80) PRIMARY KEY,
     Model NVARCHAR(80),
     YearVehicle INT,
     FuelType NVARCHAR(70),
@@ -38,7 +38,7 @@ CREATE TABLE Vehicle (
 
 CREATE TABLE CarRepair (
     RepairID INT PRIMARY KEY IDENTITY,
-    LicensePlate INT,
+    LicensePlate NVARCHAR(80),
     GarageID INT,
     RepairDate DATETIME,
     DescriptionCar TEXT,
@@ -79,7 +79,7 @@ CREATE TABLE Appointment (
     AppointmentID INT PRIMARY KEY IDENTITY,
     AppointmentDate DATETIME,
     GarageID INT,
-    LicensePlate INT,
+    LicensePlate NVARCHAR(80),
     AppointmentStatus NVARCHAR(50),
     ConfirmDate DATETIME,
     FOREIGN KEY (GarageID) REFERENCES Garage(GarageID),

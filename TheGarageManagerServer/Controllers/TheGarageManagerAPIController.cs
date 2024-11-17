@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.ObjectModel;
 using TheGarageManagerServer.DTO;
 using TheGarageManagerServer.Models;
 
@@ -102,6 +103,29 @@ public class TheGarageManagerAPIController : ControllerBase
         }
 
     }
+
+
+    [HttpPost("getCarRepairs")]
+    public IActionResult GetAllCarRepairs([FromBody] TheGarageManagerServer.DTO.LicensePlateDTO licensePlateDto)
+    {
+        try
+        {
+            string l = licensePlateDto.LicensePlate;
+            ObservableCollection<CarRepair> vehicleRepairs = context.GetRepairs(l);
+            ObservableCollection<CarRepairDTO> vehicleRepairsDto = new ObservableCollection<CarRepairDTO>();
+            foreach (CarRepair v in vehicleRepairs)
+            {
+                CarRepairDTO vDto = new CarRepairDTO(v);
+                vehicleRepairsDto.Add(vDto);
+            }
+            return Ok(vehicleRepairsDto);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
 
 
 }

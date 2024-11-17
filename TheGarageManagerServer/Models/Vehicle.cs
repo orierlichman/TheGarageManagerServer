@@ -10,7 +10,8 @@ namespace TheGarageManagerServer.Models;
 public partial class Vehicle
 {
     [Key]
-    public int LicensePlate { get; set; }
+    [StringLength(80)]
+    public string LicensePlate { get; set; } = null!;
 
     [StringLength(80)]
     public string? Model { get; set; }

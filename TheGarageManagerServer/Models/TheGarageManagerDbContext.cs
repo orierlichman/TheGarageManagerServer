@@ -37,7 +37,7 @@ public partial class TheGarageManagerDbContext : DbContext
     {
         modelBuilder.Entity<Appointment>(entity =>
         {
-            entity.HasKey(e => e.AppointmentId).HasName("PK__Appointm__8ECDFCA28EE97F3A");
+            entity.HasKey(e => e.AppointmentId).HasName("PK__Appointm__8ECDFCA20734547C");
 
             entity.HasOne(d => d.Garage).WithMany(p => p.Appointments).HasConstraintName("FK__Appointme__Garag__34C8D9D1");
 
@@ -46,7 +46,7 @@ public partial class TheGarageManagerDbContext : DbContext
 
         modelBuilder.Entity<CarRepair>(entity =>
         {
-            entity.HasKey(e => e.RepairId).HasName("PK__CarRepai__07D0BDCDF0AFBCB9");
+            entity.HasKey(e => e.RepairId).HasName("PK__CarRepai__07D0BDCDBFC6D7DF");
 
             entity.HasOne(d => d.Garage).WithMany(p => p.CarRepairs).HasConstraintName("FK__CarRepair__Garag__29572725");
 
@@ -55,21 +55,21 @@ public partial class TheGarageManagerDbContext : DbContext
 
         modelBuilder.Entity<Garage>(entity =>
         {
-            entity.HasKey(e => e.GarageId).HasName("PK__Garage__5D8BEEB1BEA98BFE");
+            entity.HasKey(e => e.GarageId).HasName("PK__Garage__5D8BEEB1FFA79BB2");
 
             entity.Property(e => e.GarageId).ValueGeneratedNever();
         });
 
         modelBuilder.Entity<GaragePart>(entity =>
         {
-            entity.HasKey(e => e.PartId).HasName("PK__GaragePa__7C3F0D30D77BEC5B");
+            entity.HasKey(e => e.PartId).HasName("PK__GaragePa__7C3F0D302EE4395B");
 
             entity.HasOne(d => d.Garage).WithMany(p => p.GarageParts).HasConstraintName("FK__GaragePar__Garag__2C3393D0");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC47087FC7");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC6DF2623B");
 
             entity.HasOne(d => d.UserGarage).WithMany(p => p.Users)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -80,14 +80,12 @@ public partial class TheGarageManagerDbContext : DbContext
 
         modelBuilder.Entity<UserStatus>(entity =>
         {
-            entity.HasKey(e => e.StatusId).HasName("PK__UserStat__C8EE2043E2AD76A5");
+            entity.HasKey(e => e.StatusId).HasName("PK__UserStat__C8EE20431756FFF1");
         });
 
         modelBuilder.Entity<Vehicle>(entity =>
         {
-            entity.HasKey(e => e.LicensePlate).HasName("PK__Vehicle__026BC15DAD5D0F53");
-
-            entity.Property(e => e.LicensePlate).ValueGeneratedNever();
+            entity.HasKey(e => e.LicensePlate).HasName("PK__Vehicle__026BC15D1DEC6F2F");
         });
 
         OnModelCreatingPartial(modelBuilder);
