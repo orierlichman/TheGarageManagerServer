@@ -11,7 +11,7 @@ Use TheGarageManagerDB
 Go
 
 CREATE TABLE Garage (
-    GarageID INT PRIMARY KEY ,
+    GarageID INT PRIMARY KEY,
     MosahNumber INT,
     GarageName NVARCHAR(150),
     TypeCode INT,
@@ -88,14 +88,18 @@ CREATE TABLE Appointment (
 
 Insert Into UserStatus Values('User')
 Insert Into UserStatus Values('Manager')
-
 Insert Into Garage Values(103,2,'benigarage',3456,'tipol', 'gigi', 'hod hasharon', '056277899', 'ori06', 8, 'mosahnik', 'king', 538903749)
+
+Insert into Vehicle Values('4444', 'Civic', '2013', 'gas', 'black','Honda',500)
+Insert into Vehicle Values('55555', 'Q3', '2023', 'gas', 'black','Audi',500)
+Insert into CarRepair Values('4444',103,(convert(datetime,'18-06-25 10:34:09 PM',5)),'Engine problem',1000)
+Insert into CarRepair Values('55555',103,(convert(datetime,'22-06-25 10:34:09 PM',5)),'tyre blow',1000)
 Go
 
 Insert Into Users Values('email2@2gmail.com','0610','ori','erlichman',103, 1)
 Go
 
-select * from Garage
+select * from CarRepair
 -- Create a login for the admin user
 CREATE LOGIN [TheGarageManagerAdminLogin] WITH PASSWORD = 'admin123';
 Go
