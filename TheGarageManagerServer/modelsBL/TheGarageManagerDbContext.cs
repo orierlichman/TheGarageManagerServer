@@ -29,6 +29,11 @@ public partial class TheGarageManagerDbContext : DbContext
         return result;
     }
 
+    public string GetGarageName(int? garageID)
+    {
+        return this.Garages.Where(u => u.GarageId == garageID).FirstOrDefault().GarageName;
+    }
+
 
 
 }

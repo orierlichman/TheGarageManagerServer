@@ -112,10 +112,12 @@ public class TheGarageManagerAPIController : ControllerBase
         {
             string l = licensePlateDto.LicensePlate;
             ObservableCollection<CarRepair> vehicleRepairs = context.GetRepairs(l);
+            List<string> GaragesNames = new List<string>();
             ObservableCollection<CarRepairDTO> vehicleRepairsDto = new ObservableCollection<CarRepairDTO>();
             foreach (CarRepair v in vehicleRepairs)
             {
                 CarRepairDTO vDto = new CarRepairDTO(v);
+                vDto.GarageName = context.GetGarageName(v.GarageId);
                 vehicleRepairsDto.Add(vDto);
             }
             return Ok(vehicleRepairsDto);

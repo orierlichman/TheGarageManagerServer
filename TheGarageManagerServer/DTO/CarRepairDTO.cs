@@ -9,6 +9,8 @@
         public DateTime? RepairDate { get; set; }
         public string DescriptionCar { get; set; }
         public int? Cost { get; set; }
+        public string GarageName { get; set; }
+
 
         public CarRepairDTO() { }
 
