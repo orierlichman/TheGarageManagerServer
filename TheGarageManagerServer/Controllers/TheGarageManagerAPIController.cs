@@ -129,5 +129,44 @@ public class TheGarageManagerAPIController : ControllerBase
     }
 
 
+   
+
+    [HttpGet("getAllGarageParts")]
+    public IActionResult GetAllGarageParts()
+    {
+        try
+        {
+            // שליפת כל החלקים מטבלת GarageParts
+            var garageParts = context.GarageParts.ToList();
+
+            // יצירת רשימה של DTOים לכל החלקים
+            List<GaragePartsDTO> garagePartsDto = new List<GaragePartsDTO>();
+
+            foreach (var part in garageParts)
+            {
+                // המרת כל פריט לאובייקט DTO
+                GaragePartsDTO partDto = new GaragePartsDTO
+                {
+                    GarageID = part.GarageId,
+                    PartName = part.PartName,
+                    PartNumber = part.PartNumber,
+                    Cost = part.Cost,
+                    ImageURL = part.ImageUrl
+                };
+                garagePartsDto.Add(partDto);
+            }
+
+            // החזרת המידע כ-OK עם רשימת החלקים
+            return Ok(garagePartsDto);
+        }
+        catch (Exception ex)
+        {
+            // טיפול בשגיאות
+            return BadRequest(ex.Message);
+        }
+    }
+
+
+
 
 }
