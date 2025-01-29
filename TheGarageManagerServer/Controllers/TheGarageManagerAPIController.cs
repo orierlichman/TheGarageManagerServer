@@ -81,6 +81,8 @@ public class TheGarageManagerAPIController : ControllerBase
 
     }
 
+
+
     [HttpGet("GetUserStatuses")]
     public IActionResult GetUserStatuses()
     {
@@ -166,6 +168,31 @@ public class TheGarageManagerAPIController : ControllerBase
         }
     }
 
+
+    [HttpPost("updateUser")]
+    public IActionResult UpdateUser([FromBody] UserDTO userDto)
+    {
+        try
+        {
+            HttpContext.Session.Clear(); //Logout any previous login attempt
+
+            //Create model user class
+            User modelsUser = userDto.GetModels();
+
+            context.Users.Update(modelsUser);
+            context.SaveChanges();
+
+            //User was added!
+            UserDTO dtoUser = new UserDTO(modelsUser);
+            //dtoUser.ProfileImagePath = GetProfileImageVirtualPath(dtoUser.Id);
+            return Ok(dtoUser);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
+    }
 
 
 
