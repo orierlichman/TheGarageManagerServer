@@ -88,6 +88,8 @@ CREATE TABLE Appointment (
 
 Insert Into UserStatus Values('User')
 Insert Into UserStatus Values('Manager')
+
+
 Insert Into Garage Values(103,2,'benigarage',3456,'tipol', 'gigi', 'hod hasharon', '056277899', 'ori06', 8, 'mosahnik', 'king', 538903749)
 
 Insert into Vehicle Values('4444', 'Civic', '2013', 'gas', 'black','Honda',500)
