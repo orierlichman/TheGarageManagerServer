@@ -6,7 +6,7 @@
         public DateTime? AppointmentDate { get; set; }
         public int? GarageID { get; set; }
         public string? LicensePlate { get; set; }
-        public string? AppointmentStatus { get; set; }
+        public int? AppointmentStatusId { get; set; }
         public DateTime? ConfirmDate { get; set; }
 
 
@@ -18,7 +18,7 @@
             this.AppointmentDate = modelStudent.AppointmentDate;
             this.GarageID = modelStudent.GarageId;
             this.LicensePlate = modelStudent.LicensePlate;
-            this.AppointmentStatus = modelStudent.AppointmentStatus;
+            this.AppointmentStatusId = modelStudent.AppointmentStatusId;
             this.ConfirmDate = modelStudent.ConfirmDate;
 
         }
@@ -32,7 +32,7 @@
                 AppointmentDate = this.AppointmentDate,
                 GarageId = this.GarageID,
                 LicensePlate = this.LicensePlate,
-                AppointmentStatus = this.AppointmentStatus,
+                AppointmentStatusId = this.AppointmentStatusId,
                 ConfirmDate = this.ConfirmDate,
             };
             return modelsUser;

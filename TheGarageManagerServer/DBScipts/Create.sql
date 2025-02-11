@@ -56,10 +56,12 @@ CREATE TABLE GarageParts (
     ImageURL NVARCHAR(350),
     FOREIGN KEY (GarageID) REFERENCES Garage(GarageID)
 );
+
 CREATE TABLE UserStatus (
     StatusID INT PRIMARY KEY IDENTITY,
     StatusName NVARCHAR(80)
 );
+
 CREATE TABLE Users (
     UserID INT PRIMARY KEY IDENTITY,
     Email  NVARCHAR(70),
@@ -72,7 +74,11 @@ CREATE TABLE Users (
     FOREIGN KEY (UserStatusID) REFERENCES UserStatus(StatusID)
 );
 
-
+Create Table AppointmentStatus
+(
+    StatusId int primary key,
+    StatusText nvarchar(50) not null
+)
 
 
 CREATE TABLE Appointment (
@@ -80,11 +86,16 @@ CREATE TABLE Appointment (
     AppointmentDate DATETIME,
     GarageID INT,
     LicensePlate NVARCHAR(80),
-    AppointmentStatus NVARCHAR(50),
+    AppointmentStatusId int default(0),
     ConfirmDate DATETIME,
     FOREIGN KEY (GarageID) REFERENCES Garage(GarageID),
-    FOREIGN KEY (LicensePlate) REFERENCES Vehicle(LicensePlate)
+    FOREIGN KEY (LicensePlate) REFERENCES Vehicle(LicensePlate),
+    FOREIGN KEY (AppointmentStatusId) REFERENCES AppointmentStatus(StatusId)
 );
+
+Insert into AppointmentStatus values (0, 'Pending')
+Insert into AppointmentStatus values (1, 'Approved')
+Insert into AppointmentStatus values (2, 'Declined')
 
 Insert Into UserStatus Values('User')
 Insert Into UserStatus Values('Manager')

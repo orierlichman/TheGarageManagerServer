@@ -22,11 +22,14 @@ public partial class Appointment
     [StringLength(80)]
     public string? LicensePlate { get; set; }
 
-    [StringLength(50)]
-    public string? AppointmentStatus { get; set; }
+    public int? AppointmentStatusId { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime? ConfirmDate { get; set; }
+
+    [ForeignKey("AppointmentStatusId")]
+    [InverseProperty("Appointments")]
+    public virtual AppointmentStatus? AppointmentStatus { get; set; }
 
     [ForeignKey("GarageId")]
     [InverseProperty("Appointments")]

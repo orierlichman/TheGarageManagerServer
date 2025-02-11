@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using TheGarageManagerServer.DTO;
 using TheGarageManagerServer.Models;
@@ -194,6 +195,73 @@ public class TheGarageManagerAPIController : ControllerBase
 
     }
 
+
+    //[HttpPost("addAppointment")]
+    //public IActionResult AddAppointment([FromBody] AppointmentDTO appointmentDto)
+    //{
+    //    try
+    //    {
+    //        // יצירת אובייקט Appointment ממודל ה-DTO
+    //        Appointment modelsAppointment = appointmentDto.GetModels();
+
+    //        // סטטוס ברירת מחדל הוא "Pending"
+    //        modelsAppointment.AppointmentStatusId = 0; // 0 הוא סטטוס Pending לפי הטבלה שלך
+
+    //        // הוספת הפגישה למסד הנתונים
+    //        context.Appointments.Add(modelsAppointment);
+    //        context.SaveChanges();
+
+    //        // החזרת המידע המפוקס מחדש ב-DTO
+    //        AppointmentDTO dtoAppointment = new AppointmentDTO(modelsAppointment);
+    //        return Ok(dtoAppointment);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        // במקרה של שגיאה
+    //        return BadRequest(ex.Message);
+    //    }
+    //}
+
+
+
+
+
+    //[HttpPost("addAppointment")]
+    //public IActionResult AddAppointment([FromBody] AppointmentDTO appointmentDto)
+    //{
+    //    try
+    //    {
+    //        // יצירת אובייקט Appointment ממודל ה-DTO
+    //        Appointment modelsAppointment = appointmentDto.GetModels();
+
+    //        // סטטוס ברירת מחדל הוא "Pending"
+    //        modelsAppointment.AppointmentStatusId = 0; // 0 הוא סטטוס Pending לפי הטבלה שלך
+
+    //        // ודא שהקשרים תקינים לפני שמוסיפים לפגישה
+    //        if (modelsAppointment.GarageID == null || modelsAppointment.LicensePlate == null)
+    //        {
+    //            return BadRequest("Garage ID or License Plate cannot be null.");
+    //        }
+
+    //        // הוספת הפגישה למסד הנתונים
+    //        context.Appointments.Add(modelsAppointment);
+    //        context.SaveChanges();
+
+    //        // החזרת המידע המפוקס מחדש ב-DTO
+    //        AppointmentDTO dtoAppointment = new AppointmentDTO(modelsAppointment);
+    //        return Ok(dtoAppointment);
+    //    }
+    //    catch (DbUpdateException dbEx)
+    //    {
+    //        // טיפול בשגיאות של עדכון מסד נתונים
+    //        return BadRequest($"Error while saving data to the database: {dbEx.InnerException?.Message}");
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        // טיפול בשגיאות כלליות
+    //        return BadRequest($"An error occurred: {ex.Message}");
+    //    }
+    //}
 
 
 }
