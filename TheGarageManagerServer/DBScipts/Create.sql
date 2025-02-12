@@ -112,6 +112,11 @@ Go
 Insert Into Users Values('email2@2gmail.com','0610','ori','erlichman',103, 1)
 Go
 
+Insert Into Vehicle Values('1122334455' , 'pro' , 2025 , 'delek' , 'blou' , 'bmw' , 2233)
+Go
+
+Insert Into Appointment Values((convert(datetime,'18-06-25 10:34:09 PM',5)), 103 , '1122334455' , 0 , (convert(datetime,'18-06-20 10:34:09 PM',5)))
+Go
 
 
 INSERT INTO GarageParts (GarageID, PartName, PartNumber, Cost, ImageURL) VALUES (103, 'Alternator', 101, 150, 'https://highlinecarcare.com/wp-content/uploads/2023/07/the-importance-of-alternator-repair-for-vehicle-performance.jpg');
@@ -160,6 +165,10 @@ ALTER ROLE db_owner ADD MEMBER [TheGarageManagerAdminUser];
 Go
 
 select * from Users
+select * from Vehicle
+select * from Appointment
+
+
 
 --DROP DATABASE YourProjectNameDB
 
