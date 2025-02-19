@@ -196,31 +196,6 @@ public class TheGarageManagerAPIController : ControllerBase
     }
 
 
-    //[HttpPost("addAppointment")]
-    //public IActionResult AddAppointment([FromBody] AppointmentDTO appointmentDto)
-    //{
-    //    try
-    //    {
-    //        // יצירת אובייקט Appointment ממודל ה-DTO
-    //        Appointment modelsAppointment = appointmentDto.GetModels();
-
-    //        // סטטוס ברירת מחדל הוא "Pending"
-    //        modelsAppointment.AppointmentStatusId = 0; // 0 הוא סטטוס Pending לפי הטבלה שלך
-
-    //        // הוספת הפגישה למסד הנתונים
-    //        context.Appointments.Add(modelsAppointment);
-    //        context.SaveChanges();
-
-    //        // החזרת המידע המפוקס מחדש ב-DTO
-    //        AppointmentDTO dtoAppointment = new AppointmentDTO(modelsAppointment);
-    //        return Ok(dtoAppointment);
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        // במקרה של שגיאה
-    //        return BadRequest(ex.Message);
-    //    }
-    //}
 
 
     [HttpPost("addAppointment")]
