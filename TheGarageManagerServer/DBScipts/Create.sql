@@ -101,11 +101,14 @@ Insert Into UserStatus Values('User')
 Insert Into UserStatus Values('Manager')
 
 
+
+
 Insert Into Garage Values(103,2,'benigarage',3456,'tipol', 'gigi', 'hod hasharon', '056277899', 'ori06', 8, 'mosahnik', 'king', 538903749)
 
 Insert into Vehicle Values('4444', 'Civic', '2013', 'gas', 'black','Honda',500)
 Insert into Vehicle Values('55555', 'Q3', '2023', 'gas', 'black','Audi',500)
-Insert into CarRepair Values('4444',103,(convert(datetime,'18-06-25 10:34:09 PM',5)),'Engine problem',1000)
+
+Insert into CarRepair Values('4444',103,(convert(datetime,'18-06-25 10:34:09 PM',4)),'Engine problem',1000)
 Insert into CarRepair Values('55555',103,(convert(datetime,'22-06-25 10:34:09 PM',5)),'tyre blow',1000)
 Go
 
@@ -115,7 +118,9 @@ Go
 Insert Into Vehicle Values('1122334455' , 'pro' , 2025 , 'delek' , 'blou' , 'bmw' , 2233)
 Go
 
-Insert Into Appointment Values((convert(datetime,'18-06-25 10:34:09 PM',5)), 103 , '1122334455' , 0 , (convert(datetime,'18-06-20 10:34:09 PM',5)))
+Insert Into Appointment Values('06-OCT-2025',103,'1122334455',0,'27-FEB-2025')
+Insert Into Appointment Values('06-OCT-2025',103,'4444',1,'27-FEB-2025')
+Insert Into Appointment Values('06-OCT-2025',103,'55555',2,'27-FEB-2025')
 Go
 
 
@@ -167,6 +172,9 @@ Go
 select * from Users
 select * from Vehicle
 select * from Appointment
+select * from CarRepair
+select * from AppointmentStatus
+select * from GarageParts
 
 
 
