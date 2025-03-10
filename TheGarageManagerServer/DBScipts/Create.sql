@@ -121,6 +121,9 @@ Go
 Insert Into Appointment Values('06-OCT-2025',103,'1122334455',0,'27-FEB-2025')
 Insert Into Appointment Values('06-OCT-2025',103,'4444',1,'27-FEB-2025')
 Insert Into Appointment Values('06-OCT-2025',103,'55555',2,'27-FEB-2025')
+Insert Into Appointment Values('07-OCT-2025',103,'12345',0,'28-FEB-2025')
+Insert Into Appointment Values('07-OCT-2025',103,'404040',1,'28-FEB-2025')
+Insert Into Appointment Values('07-OCT-2025',103,'505050',2,'28-FEB-2025')
 Go
 
 
