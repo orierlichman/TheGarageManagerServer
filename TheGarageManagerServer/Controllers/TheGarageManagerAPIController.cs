@@ -331,7 +331,41 @@ public class TheGarageManagerAPIController : ControllerBase
 
 
 
+    [HttpPost("addCarRepair")]
+    public IActionResult AddCarRepair([FromBody] CarRepairDTO carRepairDto)
+    {
+        try
+        {
+            // בדיקה אם ה- LicensePlate ו- GarageID קיימים בטבלאות המתאימות
+            var garageExists = context.Garages.Any(g => g.GarageId == carRepairDto.GarageID);
+            if (!garageExists)
+            {
+                return BadRequest("The specified Garage does not exist.");
+            }
 
+            var vehicleExists = context.Vehicles.Any(v => v.LicensePlate == carRepairDto.LicensePlate);
+            if (!vehicleExists)
+            {
+                return BadRequest("The specified Vehicle does not exist.");
+            }
+
+            // יצירת אובייקט CarRepair ממודל ה-DTO
+            CarRepair modelsCarRepair = carRepairDto.GetModels();
+
+            // הוספת תיקון הרכב למסד הנתונים
+            context.CarRepairs.Add(modelsCarRepair);
+            context.SaveChanges(); // אם הכל תקין, נשמור את השינויים במסד הנתונים
+
+            // החזרת המידע המפוקס מחדש ב-DTO
+            CarRepairDTO dtoCarRepair = new CarRepairDTO(modelsCarRepair);
+            return Ok(dtoCarRepair);
+        }
+        catch (Exception ex)
+        {
+            // במקרה של שגיאה
+            return BadRequest($"An error occurred: {ex.Message}");
+        }
+    }
 
 
 }

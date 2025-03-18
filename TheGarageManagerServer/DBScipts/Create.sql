@@ -113,6 +113,7 @@ Insert into CarRepair Values('55555',103,(convert(datetime,'22-06-25 10:34:09 PM
 Go
 
 Insert Into Users Values('email2@2gmail.com','0610','ori','erlichman',103, 1)
+Insert Into Users Values('1','1','ori1','erlichman1',103, 1)
 Go
 
 Insert Into Vehicle Values('1122334455' , 'pro' , 2025 , 'delek' , 'blou' , 'bmw' , 2233)
