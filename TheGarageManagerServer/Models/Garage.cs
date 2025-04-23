@@ -49,6 +49,9 @@ public partial class Garage
     public virtual ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
 
     [InverseProperty("Garage")]
+    public virtual ICollection<AvailableOption> AvailableOptions { get; set; } = new List<AvailableOption>();
+
+    [InverseProperty("Garage")]
     public virtual ICollection<CarRepair> CarRepairs { get; set; } = new List<CarRepair>();
 
     [InverseProperty("Garage")]

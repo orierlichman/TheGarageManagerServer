@@ -182,6 +182,14 @@ select * from GarageParts
 
 
 
+CREATE TABLE AvailableOptions(
+OptionID INT PRIMARY KEY IDENTITY,
+    OptionDate DATETIME,
+    GarageID INT,
+    FOREIGN KEY (GarageID) REFERENCES Garage(GarageID)
+    );
+
+
 --DROP DATABASE YourProjectNameDB
 
 
