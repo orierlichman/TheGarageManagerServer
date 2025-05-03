@@ -368,4 +368,33 @@ public class TheGarageManagerAPIController : ControllerBase
     }
 
 
+    [HttpGet("GetGarageAvailableOptions")]
+    public IActionResult GetGarageAvailableOptions([FromBody] GarageDTO selectedgarage)
+    {
+        try
+        {
+            List<AvailableOptionsDTO> availableOptions = new List<AvailableOptionsDTO>();
+            foreach (AvailableOption a in context.AvailableOptions)
+            {
+                if (a.GarageId == selectedgarage.GarageID)
+                {
+                    AvailableOptionsDTO adto = new AvailableOptionsDTO
+                    {
+                        OptionId = a.OptionId,
+                        OptionDate = a.OptionDate,
+                        GarageId = a.GarageId
+                    };
+                    availableOptions.Add(adto);
+                }
+            }
+            return Ok(availableOptions);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+
+
 }
