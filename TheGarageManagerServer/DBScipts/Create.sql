@@ -190,6 +190,10 @@ OptionID INT PRIMARY KEY IDENTITY,
     );
 
 
+    INSERT INTO AvailableOptions VALUES ('2025-05-15T10:00:00', 103)
+    INSERT INTO AvailableOptions VALUES ('2025-05-15T12:00:00', 103)
+    INSERT INTO AvailableOptions VALUES ('2025-05-15T14:00:00', 103)
+
 --DROP DATABASE YourProjectNameDB
 
 
