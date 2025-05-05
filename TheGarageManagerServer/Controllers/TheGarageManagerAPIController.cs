@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using TheGarageManagerServer.DTO;
+using TheGarageManagerServer.GarageAPIReaderService;
 using TheGarageManagerServer.Models;
 
 [Route("api")]
@@ -58,11 +59,33 @@ public class TheGarageManagerAPIController : ControllerBase
     }
 
     [HttpPost("register")]
-    public IActionResult Register([FromBody] UserDTO userDto)
+    public async Task<IActionResult> Register([FromBody] UserDTO userDto, [FromQuery] string rashamHavarot)
     {
         try
         {
             HttpContext.Session.Clear(); //Logout any previous login attempt
+
+            //First check if the garage is registered in minstery of transportation
+            GarageService gService = new GarageService();
+            Garage? g = await gService.ImportGarageFromApiAsync(rashamHavarot);
+
+            if (g == null)
+            {
+                return NotFound();
+            }
+
+            //check if the garage is in the db. if it does not exist, add it to the db
+            Garage? inDb = context.Garages.Where(gg => gg.RashamHavarot == rashamHavarot).FirstOrDefault();
+            if (inDb == null)
+            {
+                context.Garages.Add(g);
+                context.SaveChanges();
+                userDto.UserGarageID = g.GarageId;
+            }
+            else
+            {
+                userDto.UserGarageID = inDb.GarageId;
+            }
 
             //Create model user class
             User modelsUser = userDto.GetModels();

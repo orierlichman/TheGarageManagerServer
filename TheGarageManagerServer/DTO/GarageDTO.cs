@@ -3,6 +3,7 @@
     public class GarageDTO
     {
         public int GarageID { get; set; }
+        public string? RashamHavarot { get; set; }
         public int MosahNumber { get; set; }
         public string GarageName { get; set; }
         public int TypeCode { get; set; }

@@ -13,6 +13,9 @@ public partial class Garage
     [Column("GarageID")]
     public int GarageId { get; set; }
 
+    [StringLength(20)]
+    public string? RashamHavarot { get; set; }
+
     public int? MosahNumber { get; set; }
 
     [StringLength(150)]

@@ -6,9 +6,9 @@ namespace TheGarageManagerServer.GarageAPIReaderService
     {
         private readonly HttpClient _httpClient;
 
-        public ApiService(HttpClient httpClient)
+        public ApiService()
         {
-            _httpClient = httpClient;
+            _httpClient = new HttpClient();
         }
 
         public async Task<List<MosahRecord>> GetApiData(string apiUrl, string resourceId)

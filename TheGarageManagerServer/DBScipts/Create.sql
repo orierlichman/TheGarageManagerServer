@@ -11,7 +11,8 @@ Use TheGarageManagerDB
 Go
 
 CREATE TABLE Garage (
-    GarageID INT PRIMARY KEY,
+    GarageID INT PRIMARY KEY identity(103,1),
+    RashamHavarot NVARCHAR(20),
     MosahNumber INT,
     GarageName NVARCHAR(150),
     TypeCode INT,
@@ -103,7 +104,21 @@ Insert Into UserStatus Values('Manager')
 
 
 
-Insert Into Garage Values(103,2,'benigarage',3456,'tipol', 'gigi', 'hod hasharon', '056277899', 'ori06', 8, 'mosahnik', 'king', 538903749)
+Insert Into Garage (
+    RashamHavarot,
+    MosahNumber,
+    GarageName,
+    TypeCode,
+    GarageType,
+    GarageAddress,
+    City,
+    Phone,
+    ZipCode,
+    SpecializationCode,
+    Specialization,
+    ManagerSpecialization,
+    License
+) Values('103',103,'benigarage',3456,'tipol', 'gigi', 'hod hasharon', '056277899', 'ori06', 8, 'mosahnik', 'king', 538903749)
 
 Insert into Vehicle Values('4444', 'Civic', '2013', 'gas', 'black','Honda',500)
 Insert into Vehicle Values('55555', 'Q3', '2023', 'gas', 'black','Audi',500)
@@ -122,9 +137,6 @@ Go
 Insert Into Appointment Values('06-OCT-2025',103,'1122334455',0,'27-FEB-2025')
 Insert Into Appointment Values('06-OCT-2025',103,'4444',1,'27-FEB-2025')
 Insert Into Appointment Values('06-OCT-2025',103,'55555',2,'27-FEB-2025')
-Insert Into Appointment Values('07-OCT-2025',103,'12345',0,'28-FEB-2025')
-Insert Into Appointment Values('07-OCT-2025',103,'404040',1,'28-FEB-2025')
-Insert Into Appointment Values('07-OCT-2025',103,'505050',2,'28-FEB-2025')
 Go
 
 
@@ -197,5 +209,5 @@ OptionID INT PRIMARY KEY IDENTITY,
 --DROP DATABASE YourProjectNameDB
 
 
-
+select * from Garage
 --scaffold-DbContext "Server = (localdb)\MSSQLLocalDB;Initial Catalog=TheGarageManagerDB;User ID=TheGarageManagerAdminLogin;Password=admin123;" Microsoft.EntityFrameworkCore.SqlServer -OutPutDir Models -Context TheGarageManagerDbContext -DataAnnotations –force
