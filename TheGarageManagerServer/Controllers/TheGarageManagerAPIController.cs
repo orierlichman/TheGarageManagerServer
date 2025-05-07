@@ -420,4 +420,37 @@ public class TheGarageManagerAPIController : ControllerBase
 
 
 
+
+    [HttpPost("GetAppointmentsbyUser")]
+    public IActionResult GetAppointmentsbyUser([FromBody] List<string> licenses)
+    {
+        try
+        {
+            List<AppointmentDTO> appointmentDTOs = new List<AppointmentDTO>();
+            foreach (string L in licenses)
+            {
+                var vehicleExists = context.Vehicles.Any(v => v.LicensePlate == L);
+                if (vehicleExists)
+                {
+                    foreach (var appointment in context.Appointments)
+                    {
+                        if (appointment.LicensePlate == L)
+                        {
+                            AppointmentDTO appointmentDTO = new AppointmentDTO(appointment);
+                            appointmentDTOs.Add(appointmentDTO);
+                        }
+                    }
+                }
+            }
+            return Ok(appointmentDTOs);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+
+
+
 }
