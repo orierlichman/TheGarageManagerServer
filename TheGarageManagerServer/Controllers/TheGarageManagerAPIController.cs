@@ -453,4 +453,60 @@ public class TheGarageManagerAPIController : ControllerBase
 
 
 
+
+
+
+    [HttpPost("GenerateDefaultAppointments")]
+    public IActionResult GenerateDefaultAppointments()
+    {
+        try
+        {
+            int daysToGenerate = 7; // כמה ימים קדימה ליצור תורים
+            TimeSpan startHour = new TimeSpan(8, 0, 0);  // 08:00
+            TimeSpan endHour = new TimeSpan(18, 0, 0);   // 18:00
+
+            DateTime today = DateTime.Today;
+
+            // שליפת כל המוסכים
+            List<Garage> garages = context.Garages.ToList();
+
+            foreach (Garage garage in garages)
+            {
+                for (int day = 0; day < daysToGenerate; day++)
+                {
+                    DateTime currentDate = today.AddDays(day);
+
+                    for (TimeSpan hour = startHour; hour <= endHour; hour = hour.Add(TimeSpan.FromHours(1)))
+                    {
+                        DateTime optionDateTime = currentDate.Date + hour;
+
+                        // לבדוק שלא נוצר כבר תור באותו זמן ומוסך
+                        bool exists = context.AvailableOptions.Any(opt =>
+                            opt.GarageId == garage.GarageId &&
+                            opt.OptionDate == optionDateTime);
+
+                        if (!exists)
+                        {
+                            AvailableOption newOption = new AvailableOption
+                            {
+                                GarageId = garage.GarageId,
+                                OptionDate = optionDateTime
+                            };
+
+                            context.AvailableOptions.Add(newOption);
+                        }
+                    }
+                }
+            }
+
+            context.SaveChanges();
+            return Ok("Appointment options generated successfully.");
+        }
+        catch (Exception ex)
+        {
+            return BadRequest($"An error occurred: {ex.Message}");
+        }
+    }
+
+
 }
