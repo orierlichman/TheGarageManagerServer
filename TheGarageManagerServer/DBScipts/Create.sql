@@ -120,6 +120,23 @@ Insert Into Garage (
     License
 ) Values('103',103,'benigarage',3456,'tipol', 'gigi', 'hod hasharon', '056277899', 'ori06', 8, 'mosahnik', 'king', 538903749)
 
+
+Insert Into Garage (
+    RashamHavarot,
+    MosahNumber,
+    GarageName,
+    TypeCode,
+    GarageType,
+    GarageAddress,
+    City,
+    Phone,
+    ZipCode,
+    SpecializationCode,
+    Specialization,
+    ManagerSpecialization,
+    License
+) Values('107',107,'DanDemoGarage',3456,'tipol', 'gigi', 'hod hasharon', '056277899', 'ori06', 8, 'mosahnik', 'king', 666333)
+
 Insert into Vehicle Values('4444', 'Civic', '2013', 'gas', 'black','Honda',500)
 Insert into Vehicle Values('55555', 'Q3', '2023', 'gas', 'black','Audi',500)
 
@@ -206,6 +223,10 @@ OptionID INT PRIMARY KEY IDENTITY,
     INSERT INTO AvailableOptions VALUES ('2025-05-15T10:00:00', 103)
     INSERT INTO AvailableOptions VALUES ('2025-05-15T12:00:00', 103)
     INSERT INTO AvailableOptions VALUES ('2025-05-15T14:00:00', 103)
+
+    INSERT INTO AvailableOptions VALUES ('2025-05-28T10:00:00', 107)
+    INSERT INTO AvailableOptions VALUES ('2025-05-28T12:00:00', 107)
+    INSERT INTO AvailableOptions VALUES ('2025-05-28T14:00:00', 107)
 
 --DROP DATABASE YourProjectNameDB
 
