@@ -509,4 +509,38 @@ public class TheGarageManagerAPIController : ControllerBase
     }
 
 
+
+
+    [HttpPost("insertAppointments")]
+    public IActionResult InsertAppointments([FromBody] List<TheGarageManagerServer.DTO.AppointmentDTO> appointments)
+    {
+        try
+        {
+            foreach (var appointmentDto in appointments)
+            {
+                var modelAppointment = appointmentDto.GetModels();
+
+                // בדיקה האם כבר קיים תור לאותו רכב באותו תאריך
+                bool alreadyExists = context.Appointments.Any(a =>
+                    a.AppointmentDate == modelAppointment.AppointmentDate &&
+                    a.LicensePlate == modelAppointment.LicensePlate);
+
+                if (!alreadyExists)
+                {
+                    context.Appointments.Add(modelAppointment);
+                }
+            }
+
+            context.SaveChanges();
+            return Ok("Appointments inserted successfully (duplicates skipped).");
+        }
+        catch (Exception ex)
+        {
+            return BadRequest($"Error while inserting appointments: {ex.Message}");
+        }
+    }
+
+
+
+
 }
