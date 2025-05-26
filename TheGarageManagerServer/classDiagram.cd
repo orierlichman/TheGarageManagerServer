@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TheGarageManagerServer.Models.Appointment" Collapsed="true">
+    <Position X="5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gCAEAEAAAAAAAAAAAAAAAAAAAAgIQAAABAAAAAAAACA=</HashCode>
+      <FileName>Models\Appointment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TheGarageManagerServer.Models.AppointmentStatus" Collapsed="true">
+    <Position X="6.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAACAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AppointmentStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TheGarageManagerServer.Models.AppUser" Collapsed="true">
+    <Position X="8.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAAAAAAAAAAAAAAAAAAAAAQAACAIAAAA=</HashCode>
+      <FileName>Models\AppUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TheGarageManagerServer.Models.AvailableOption" Collapsed="true">
+    <Position X="10.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACCEAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AvailableOption.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TheGarageManagerServer.Models.CarRepair" Collapsed="true">
+    <Position X="5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BCAEAEAAAAAAAACAAAAAABEAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Models\CarRepair.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TheGarageManagerServer.Models.Garage" Collapsed="true">
+    <Position X="6.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAEgCAAAAAAAAQIAAAAAABAQgAAEAABAABBIBAACEA=</HashCode>
+      <FileName>Models\Garage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TheGarageManagerServer.Models.GaragePart" Collapsed="true">
+    <Position X="8.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BCAEQAAAAAAAAAAAQAAAABAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Models\GaragePart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TheGarageManagerServer.Models.TheGarageManagerDbContext" Collapsed="true">
+    <Position X="10.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAQAQgAAAABAAAABAUMAAQAAAEABAABAAQAA=</HashCode>
+      <FileName>Models\TheGarageManagerDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TheGarageManagerServer.Models.User" Collapsed="true">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACEAAAAIAAAAAChAAAAAAAAAAAAACAIAAAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TheGarageManagerServer.Models.UserStatus" Collapsed="true">
+    <Position X="6.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAIAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\UserStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TheGarageManagerServer.Models.Vehicle" Collapsed="true">
+    <Position X="8.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAgAAEAAAAAAAAAAAAAAAABAQAAAAAAAEAgQgAAAAAA=</HashCode>
+      <FileName>Models\Vehicle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

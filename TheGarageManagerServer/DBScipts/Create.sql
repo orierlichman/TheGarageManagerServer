@@ -146,6 +146,8 @@ Go
 
 Insert Into Users Values('email2@2gmail.com','0610','ori','erlichman',103, 1)
 Insert Into Users Values('1','1','ori1','erlichman1',103, 1)
+Insert into Users values('ori.erlichman11@gmail.com' , 'orier11','ori','erlichman',103, 1)
+Insert into Users values('guy.jaffe22@gmail.com' , 'guyjaffe22','guy','jaffe',103, 2)
 Go
 
 Insert Into Vehicle Values('1122334455' , 'pro' , 2025 , 'delek' , 'blou' , 'bmw' , 2233)
@@ -209,6 +211,8 @@ select * from CarRepair
 select * from AppointmentStatus
 select * from GarageParts
 select * from AvailableOptions
+select * from UserStatus
+
 
 
 
