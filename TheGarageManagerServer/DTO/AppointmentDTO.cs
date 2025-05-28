@@ -9,6 +9,8 @@
         public int? AppointmentStatusId { get; set; }
         public DateTime? ConfirmDate { get; set; }
 
+        public VehicleDTO? Vehicle { get; set; }
+
 
         public AppointmentDTO() { } 
 

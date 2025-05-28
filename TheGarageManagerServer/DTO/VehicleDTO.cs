@@ -9,6 +9,7 @@
         public string? Color { get; set; }
         public string? Manufacturer { get; set; }
         public int? CurrentMileage { get; set; }
+        public List<CarRepairDTO>? CarRepairs { get; set; } = new List<CarRepairDTO>();
 
         public VehicleDTO() { }
 
@@ -21,6 +22,13 @@
             this.Color = modelVehicle.Color;
             this.Manufacturer = modelVehicle.Manufacturer;
             this.CurrentMileage = modelVehicle.CurrentMileage;
+            if (modelVehicle.CarRepairs != null)
+            {
+                foreach (var carRepair in modelVehicle.CarRepairs)
+                {
+                    this.CarRepairs.Add(new CarRepairDTO(carRepair));
+                }
+            }
         }
 
 

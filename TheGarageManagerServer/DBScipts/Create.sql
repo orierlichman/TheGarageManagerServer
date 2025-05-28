@@ -236,4 +236,7 @@ OptionID INT PRIMARY KEY IDENTITY,
 
 
 select * from Garage
+select * from Appointment
+
+update Appointment Set AppointmentDate = '2025-05-15T10:00:00' where AppointmentID = 1
 --scaffold-DbContext "Server = (localdb)\MSSQLLocalDB;Initial Catalog=TheGarageManagerDB;User ID=TheGarageManagerAdminLogin;Password=admin123;" Microsoft.EntityFrameworkCore.SqlServer -OutPutDir Models -Context TheGarageManagerDbContext -DataAnnotations –force

@@ -267,8 +267,23 @@ public class TheGarageManagerAPIController : ControllerBase
     {
         try
         {
+
+            //check logged in
+            string? email = HttpContext.Session.GetString("loggedInUser");
+            if (email == null)
+            {
+                return Unauthorized();
+            }
+            // שליפת המשתמש מהמסד נתונים
+            User? user = context.GetUser(email);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            int garageId = user.UserGarageId;
             // שליפת כל הבקשות מהמסד נתונים (Appointments)
-            var appointments = context.Appointments
+            var appointments = context.Appointments.Where(a=>a.GarageId == garageId) // סינון לפי ה-GarageId של המשתמש
                                       .Include(a => a.Garage) // אם אתה רוצה להחזיר גם את פרטי ה-Garage
                                       .Include(a => a.LicensePlateNavigation) // אם אתה רוצה להחזיר גם את פרטי הרכב*****************
                                       .Include(a => a.AppointmentStatus) // אם אתה רוצה להחזיר את פרטי הסטטוס
@@ -279,6 +294,50 @@ public class TheGarageManagerAPIController : ControllerBase
 
             // החזרת התשובה למשתמש
             return Ok(appointmentDtos);
+        }
+        catch (Exception ex)
+        {
+            // במקרה של שגיאה, מחזירים את הודעת השגיאה
+            return BadRequest($"An error occurred: {ex.Message}");
+        }
+    }
+
+    [HttpGet("getCars")]
+    public IActionResult GetCars()
+    {
+        try
+        {
+
+            //check logged in
+            string? email = HttpContext.Session.GetString("loggedInUser");
+            if (email == null)
+            {
+                return Unauthorized();
+            }
+            // שליפת המשתמש מהמסד נתונים
+            User? user = context.GetUser(email);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            int garageId = user.UserGarageId;
+            // שליפת כל הרכבים מהמסד נתונים ()
+            var garage = context.Garages.Where(g => g.GarageId == garageId)
+                                        .Include(g => g.Appointments).ThenInclude(a => a.LicensePlateNavigation).ThenInclude(v=>v.CarRepairs).FirstOrDefault();
+                                        
+
+            List<VehicleDTO> vehicleDtos = new List<VehicleDTO>();
+
+            foreach(var appointment in garage.Appointments)
+            {
+                if (appointment.LicensePlateNavigation != null)
+                {
+                    VehicleDTO vehicleDto = new VehicleDTO(appointment.LicensePlateNavigation);
+                    vehicleDtos.Add(vehicleDto);
+                }
+            }
+            return Ok(vehicleDtos);
         }
         catch (Exception ex)
         {
@@ -391,21 +450,24 @@ public class TheGarageManagerAPIController : ControllerBase
     }
 
 
-    [HttpPost("GetGarageAvailableOptions")]
-    public IActionResult GetGarageAvailableOptions([FromBody] int? selectedgarage)
+    [HttpGet("GetGarageAvailableOptions")]
+    public IActionResult GetGarageAvailableOptions([FromQuery] int? selectedgarage, [FromQuery] DateTime date)
     {
         try
         {
+            int start = 8, end = 17;
             List<AvailableOptionsDTO> availableOptions = new List<AvailableOptionsDTO>();
-            foreach (AvailableOption a in context.AvailableOptions)
+            List<Appointment> appointments = context.Appointments.Where(a => a.GarageId == selectedgarage && a.AppointmentDate.Value.Date == date.Date).ToList();
+                
+            for (int time = start; time <= end; time++)
             {
-                if (a.GarageId == selectedgarage)
+                DateTime appTime = new DateTime(date.Year, date.Month, date.Day, time, 0, 0);
+                if (!appointments.Exists(a => a.AppointmentDate == appTime))
                 {
                     AvailableOptionsDTO adto = new AvailableOptionsDTO
                     {
-                        OptionId = a.OptionId,
-                        OptionDate = a.OptionDate,
-                        GarageId = a.GarageId
+                        OptionDate = appTime,
+                        GarageId = selectedgarage
                     };
                     availableOptions.Add(adto);
                 }
@@ -531,6 +593,45 @@ public class TheGarageManagerAPIController : ControllerBase
                 }
             }
 
+            context.SaveChanges();
+            return Ok("Appointments inserted successfully (duplicates skipped).");
+        }
+        catch (Exception ex)
+        {
+            return BadRequest($"Error while inserting appointments: {ex.Message}");
+        }
+    }
+
+    [HttpPost("insertAppointment")]
+    public IActionResult InsertAppointment([FromBody] TheGarageManagerServer.DTO.AppointmentDTO appointment, [FromQuery] string selectedGarage)
+    {
+        try
+        {
+            Garage? g = context.Garages.FirstOrDefault(gg => gg.RashamHavarot == selectedGarage);
+            if (g == null)
+            {
+                return BadRequest("Garage not found.");
+            }
+
+            //check if vehicle exist
+            Vehicle? v = context.Vehicles.FirstOrDefault(vv => vv.LicensePlate == appointment.LicensePlate);
+            if (v == null && appointment.Vehicle == null)
+            {
+                return BadRequest("Vehicle not found and no vehicle data provided in appointment DTO.");
+            }
+            if (v == null && appointment.Vehicle != null)
+            {
+                v = appointment.Vehicle.GetVehicle();
+                context.Vehicles.Add(v);
+                context.SaveChanges();
+            }
+            var modelAppointment = appointment.GetModels();
+            modelAppointment.GarageId = g.GarageId; // הגדרת ה-GarageId של הפגישה
+            modelAppointment.AppointmentStatusId = 0; // הגדרת סטטוס ברירת מחדל (Pending)
+            modelAppointment.AppointmentId = 0;
+            
+            context.Appointments.Add(modelAppointment);
+            
             context.SaveChanges();
             return Ok("Appointments inserted successfully (duplicates skipped).");
         }
