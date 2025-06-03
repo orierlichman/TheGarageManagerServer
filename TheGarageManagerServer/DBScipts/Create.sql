@@ -141,6 +141,9 @@ Insert into Vehicle Values('4444', 'Civic', '2013', 'gas', 'black','Honda',500)
 Insert into Vehicle Values('55555', 'Q3', '2023', 'gas', 'black','Audi',500)
 
 Insert into CarRepair Values('4444',103,(convert(datetime,'18-06-25 10:34:09 PM',4)),'Engine problem',1000)
+Insert into CarRepair Values('4444',103,(convert(datetime,'20-06-25 10:34:09 PM',4)),'Brake system repairs',1000)
+Insert into CarRepair Values('4444',103,(convert(datetime,'22-06-25 10:34:09 PM',4)),'Transmission services ',1000)
+Insert into CarRepair Values('4444',103,(convert(datetime,'24-06-25 10:34:09 PM',4)),'Electrical system diagnostics',1000)
 Insert into CarRepair Values('55555',103,(convert(datetime,'22-06-25 10:34:09 PM',5)),'tyre blow',1000)
 Go
 
@@ -148,6 +151,8 @@ Insert Into Users Values('email2@2gmail.com','0610','ori','erlichman',103, 1)
 Insert Into Users Values('1','1','ori1','erlichman1',103, 1)
 Insert into Users values('ori.erlichman11@gmail.com' , 'orier11','ori','erlichman',103, 1)
 Insert into Users values('guy.jaffe22@gmail.com' , 'guyjaffe22','guy','jaffe',103, 2)
+Insert into Users values('zion1234.com' , 'Zion1234','zion','eli',105, 1)
+
 Go
 
 Insert Into Vehicle Values('1122334455' , 'pro' , 2025 , 'delek' , 'blou' , 'bmw' , 2233)
