@@ -156,11 +156,21 @@ Insert into Users values('zion1234.com' , 'Zion1234','zion','eli',105, 1)
 Go
 
 Insert Into Vehicle Values('1122334455' , 'pro' , 2025 , 'delek' , 'blou' , 'bmw' , 2233)
+Insert Into Vehicle Values('6666' , 'cool' , 2025 , 'delek' , 'red' , 'ferrari' , 2233)
+Insert Into Vehicle Values('7777' , 'max' , 2025 , 'delek' , 'blou' , 'lamburghini' , 2233)
+Insert Into Vehicle Values('8888' , 'bro' , 2025 , 'delek' , 'black' , 'porsche' , 2233)
+
+
+
 Go
 
 Insert Into Appointment Values('06-OCT-2025',103,'1122334455',0,'27-FEB-2025')
 Insert Into Appointment Values('06-OCT-2025',103,'4444',1,'27-FEB-2025')
 Insert Into Appointment Values('06-OCT-2025',103,'55555',2,'27-FEB-2025')
+Insert Into Appointment Values('06-OCT-2025',103,'6666',1,'27-FEB-2025')
+Insert Into Appointment Values('10-OCT-2025',103,'7777',1,'27-FEB-2025')
+Insert Into Appointment Values('20-OCT-2025',103,'8888',0,'27-FEB-2025')
+
 Go
 
 
