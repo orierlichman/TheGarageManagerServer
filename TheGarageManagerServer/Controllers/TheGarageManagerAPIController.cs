@@ -643,5 +643,34 @@ public class TheGarageManagerAPIController : ControllerBase
 
 
 
+    [HttpPost("insertVehicle")]
+    public IActionResult InsertVehicle([FromBody] VehicleDTO vehicleDto)
+    {
+        try
+        {
+            if (vehicleDto == null)
+            {
+                return BadRequest("Vehicle data is missing.");
+            }
+
+            // לבדוק אם כבר קיים רכב עם אותו מספר רישוי
+            bool exists = context.Vehicles.Any(v => v.LicensePlate == vehicleDto.LicensePlate);
+            if (exists)
+            {
+                return Conflict("A vehicle with the same license plate already exists.");
+            }
+
+            Vehicle vehicle = vehicleDto.GetVehicle();
+            context.Vehicles.Add(vehicle);
+            context.SaveChanges();
+
+            return Ok("Vehicle inserted successfully.");
+        }
+        catch (Exception ex)
+        {
+            return BadRequest($"Error while inserting vehicle: {ex.Message}");
+        }
+    }
+
 
 }
