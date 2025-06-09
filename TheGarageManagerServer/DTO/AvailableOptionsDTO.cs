@@ -4,6 +4,6 @@
     {
         public int OptionId { get; set; }
         public DateTime? OptionDate { get; set; }
-        public int? GarageId { get; set; }
+        public string GarageId { get; set; }
     }
 }

@@ -334,7 +334,11 @@ public class TheGarageManagerAPIController : ControllerBase
                 if (appointment.LicensePlateNavigation != null)
                 {
                     VehicleDTO vehicleDto = new VehicleDTO(appointment.LicensePlateNavigation);
-                    vehicleDtos.Add(vehicleDto);
+                    if (!vehicleDtos.Exists(v => v.LicensePlate == vehicleDto.LicensePlate))
+                    {
+                        vehicleDtos.Add(vehicleDto);
+                    }
+                    
                 }
             }
             return Ok(vehicleDtos);
@@ -374,12 +378,12 @@ public class TheGarageManagerAPIController : ControllerBase
 
 
     [HttpPost("updateAppointmentStatus")]
-    public IActionResult UpdateAppointmentStatus([FromBody] AppointmentDTO updateDto)
+    public IActionResult UpdateAppointmentStatus([FromBody] int appoimtmentid, [FromQuery] int statusid)
     {
         try
         {
             // שליפת הפגישה לפי AppointmentID
-            var appointment = context.Appointments.FirstOrDefault(a => a.AppointmentId == updateDto.AppointmentID);
+            var appointment = context.Appointments.FirstOrDefault(a => a.AppointmentId == appoimtmentid);
 
             if (appointment == null)
             {
@@ -387,7 +391,7 @@ public class TheGarageManagerAPIController : ControllerBase
             }
 
             // בדיקה אם הסטטוס שנשלח קיים
-            var statusExists = context.AppointmentStatuses.Any(s => s.StatusId == updateDto.AppointmentStatusId);
+            var statusExists = context.AppointmentStatuses.Any(s => s.StatusId == statusid);
 
             if (!statusExists)
             {
@@ -395,7 +399,7 @@ public class TheGarageManagerAPIController : ControllerBase
             }
 
             // עדכון הסטטוס לפגישה
-            appointment.AppointmentStatusId = updateDto.AppointmentStatusId;
+            appointment.AppointmentStatusId = statusid;
 
             // שמירת השינויים במסד הנתונים
             context.SaveChanges();
@@ -451,13 +455,13 @@ public class TheGarageManagerAPIController : ControllerBase
 
 
     [HttpGet("GetGarageAvailableOptions")]
-    public IActionResult GetGarageAvailableOptions([FromQuery] int? selectedgarage, [FromQuery] DateTime date)
+    public IActionResult GetGarageAvailableOptions([FromQuery] string selectedgarage, [FromQuery] DateTime date)
     {
         try
         {
             int start = 8, end = 17;
             List<AvailableOptionsDTO> availableOptions = new List<AvailableOptionsDTO>();
-            List<Appointment> appointments = context.Appointments.Where(a => a.GarageId == selectedgarage && a.AppointmentDate.Value.Date == date.Date).ToList();
+            List<Appointment> appointments = context.Appointments.Include(a=>a.Garage).Where(a => a.Garage.RashamHavarot == selectedgarage && a.AppointmentDate.Value.Date == date.Date).ToList();
                 
             for (int time = start; time <= end; time++)
             {
@@ -615,13 +619,13 @@ public class TheGarageManagerAPIController : ControllerBase
 
             //check if vehicle exist
             Vehicle? v = context.Vehicles.FirstOrDefault(vv => vv.LicensePlate == appointment.LicensePlate);
-            if (v == null && appointment.Vehicle == null)
+            if (v == null && appointment.car == null)
             {
                 return BadRequest("Vehicle not found and no vehicle data provided in appointment DTO.");
             }
-            if (v == null && appointment.Vehicle != null)
+            if (v == null && appointment.car != null)
             {
-                v = appointment.Vehicle.GetVehicle();
+                v = appointment.car.GetVehicle();
                 context.Vehicles.Add(v);
                 context.SaveChanges();
             }

@@ -4,11 +4,12 @@
     {
         public string LicensePlate { get; set; }  
         public string? Model { get; set; }
-        public int? YearVehicle { get; set; }
+        public string? VehicleYear { get; set; }
         public string? FuelType { get; set; }
         public string? Color { get; set; }
         public string? Manufacturer { get; set; }
         public int? CurrentMileage { get; set; }
+        public string ImageURL { get; set; }
         public List<CarRepairDTO>? CarRepairs { get; set; } = new List<CarRepairDTO>();
 
         public VehicleDTO() { }
@@ -17,7 +18,7 @@
         {
             this.LicensePlate = modelVehicle.LicensePlate;
             this.Model = modelVehicle.Model;
-            this.YearVehicle = modelVehicle.YearVehicle;
+            this.VehicleYear = modelVehicle.YearVehicle.ToString();
             this.FuelType = modelVehicle.FuelType;
             this.Color = modelVehicle.Color;
             this.Manufacturer = modelVehicle.Manufacturer;
@@ -38,7 +39,7 @@
             {
                 LicensePlate = this.LicensePlate,
                 Model = this.Model,
-                YearVehicle = this.YearVehicle,
+                YearVehicle = int.Parse(this.VehicleYear),
                 FuelType = this.FuelType,
                 Color = this.Color,
                 Manufacturer = this.Manufacturer,

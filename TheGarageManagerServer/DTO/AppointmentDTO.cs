@@ -9,7 +9,7 @@
         public int? AppointmentStatusId { get; set; }
         public DateTime? ConfirmDate { get; set; }
 
-        public VehicleDTO? Vehicle { get; set; }
+        public VehicleDTO car { get; set; }
 
 
         public AppointmentDTO() { } 
@@ -22,7 +22,6 @@
             this.LicensePlate = modelStudent.LicensePlate;
             this.AppointmentStatusId = modelStudent.AppointmentStatusId;
             this.ConfirmDate = modelStudent.ConfirmDate;
-
         }
 
 
